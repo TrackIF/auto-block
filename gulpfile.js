@@ -1,16 +1,10 @@
-// var _ = require('lodash')
 var argv = require('argv')
 var gulp = require('gulp')
 var babel = require('gulp-babel')
 var eslint = require('gulp-eslint')
-// var gulpCount = require('gulp-count')
-// var gulpInstall = require('gulp-install')
 var gutil = require('gulp-util')
 var colors = gutil.colors
 var del = require('del')
-// var sourcemaps = require('gulp-sourcemaps')
-// var spawn = require('child_process').spawn
-// var gls = require('gulp-live-server')
 var runSequence = require('run-sequence')
 var mocha = require('gulp-spawn-mocha')
 var changed = require('gulp-changed')
@@ -58,6 +52,7 @@ gulp.task('deploy', ['deploy:lambdas'])
 // * You should never call these tasks directly
 
 /* CLEAN */
+
 gulp.task('clean:all', (done) => {
   runSequence('clean:lib:run', done)
 })
@@ -65,8 +60,6 @@ gulp.task('clean:all', (done) => {
 gulp.task('nuke:all', ['clean:all'], (done) => {
   runSequence('clean-npm:lib:run', done)
 })
-
-/* INSTALL */
 
 /* BUILD */
 
@@ -83,13 +76,10 @@ gulp.task('test-unit:all', ['build:all'], (done) => {
 })
 
 /* LINT */
+
 gulp.task('lint:all', ['build:all', 'test-unit:all'], (done) => {
   runSequence('lint:all:run', done)
 })
-
-/* RUN */
-
-/* DEPLOY */
 
 // LOGIC ONLY
 // * No dependencies allowed
@@ -109,8 +99,6 @@ gulp.task('clean-npm:lib:run', () => {
   return del(targets)
 })
 
-/* INSTALL */
-
 /* BUILD */
 
 gulp.task('build:lib:run', () => {
@@ -119,11 +107,9 @@ gulp.task('build:lib:run', () => {
   return gulp
     .src(src)
     .pipe(changed(dst))
-    // .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
     }))
-    // .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(dst))
 })
 
@@ -132,7 +118,6 @@ gulp.task('build:lib:run', () => {
 gulp.task('test-unit:lib:run', () => {
   var mochaOptions = {
     cwd: 'dist'
-    // opts: 'mocha.opts'
   }
 
   if (args.options['test-only']) {
@@ -163,7 +148,3 @@ gulp.task('lint:all:run', () => {
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 })
-
-/* START/WATCH */
-
-/* DEPLOY */
