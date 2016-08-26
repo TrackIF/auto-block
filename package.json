@@ -6,6 +6,9 @@
   "directories": {
     "test": "tests"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "gulp test"
   },
