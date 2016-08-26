@@ -21,7 +21,10 @@
     "auto",
     "controller"
   ],
-  "author": "Adam Babcock",
+  "author": {
+    "name": "Adam Babcock",
+    "url": "https://github.com/mrhen"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/TrackIF/auto-block/issues"
