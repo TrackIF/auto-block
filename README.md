@@ -212,6 +212,8 @@ The `done` function can also be provided as the second parameter to `autoBlock.r
     })
 ```
 
+This second parameter will _not_ override the `.done` field.
+
 ### .data
 
 ```javascript
