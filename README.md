@@ -1,6 +1,9 @@
 # auto-block
 Simplified controller creation built around async.auto
 
+[![NPM version](https://img.shields.io/npm/v/auto-block.svg)](https://www.npmjs.com/package/auto-block)
+[![Build Status](https://img.shields.io/travis/TrackIF/auto-block/master.svg)](https://travis-ci.org/TrackIF/auto-block)
+
 ## Example usage
 
 ```javascript
