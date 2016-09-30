@@ -561,12 +561,33 @@ You can add these sorts of value dependencies using `.when`:
 
     // doBeta will only run if doAlpha results in a value similar to:
     // {
-    //     flag: true
+    //     "flag": true
     // }
 ```
 
 `.when` settings will automatically add dependencies. In the above example, the
 "beta" step will still occur after the "alpha" step.
+
+Value comparison is supported using objects:
+
+```javascript
+    block: {
+        'alpha': {
+            func: utility.doAlpha,
+        },
+        'beta': {
+            func: utility.doBeta,
+            when: {
+                'alpha.foo': 'bar'
+            }
+        }
+    } 
+
+    // doBeta will only run if doAlpha result includes the follow key/value pair:
+    // {
+    //     "foo": "bar"
+    // }
+```
 
 Negative checks can be made by using a `!` prefix:
 
@@ -578,6 +599,25 @@ Negative checks can be made by using a `!` prefix:
         'beta': {
             func: utility.doBeta,
             when: '!alpha.flag'
+        }
+    } 
+```
+
+Multiple checks are allowed (all checks must succeed):
+
+```javascript
+    block: {
+        'alpha': {
+            func: utility.doAlpha,
+        },
+        'beta': {
+            func: utility.doBeta,
+            when: [
+                '!alpha.flag',
+                {
+                    'alpha.foo': 'bar'
+                }
+            ]
         }
     } 
 ```
