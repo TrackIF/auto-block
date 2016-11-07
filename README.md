@@ -390,7 +390,7 @@ Errors that break out of the controller will be sent through to the `.done` hand
             'retry': false
         },
         errorSuppress: {
-            'retry': false
+            'data.retry': false
         },
         block: {
             'alpha': {
