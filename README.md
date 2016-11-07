@@ -137,10 +137,7 @@ a step fails:
                 }
                 cb(err, result);
             })
-        },
-        'two': ['one', function (results, cb) {
-            // step two
-        }]
+        }
     }, function (err, results) {
         if (err && err.status) {
             res.status(err.status).send({
@@ -312,11 +309,11 @@ If a step produces an error, you can map additional fields onto the error before
                 'bar': 'zaz'
             }
         },
-        errorsDefaults: {
+        errorDefaults: {
             'fizz': 'buzz'
             'bar': 'not zaz'
         },
-        errorsMapping: {
+        errorMapping: {
             'bar': 'foo.bar',
             'alpha': 'results.alpha'
         },
@@ -359,11 +356,11 @@ If necessary, you can also add error mapping for particular steps:
             'beta': {
                 func: utility.doBeta, // generates new Error('bad news')
                 with: ['alpha']
-                errorsDefaults: {
+                errorDefaults: {
                     'fizz': 'buzz'
                     'bar': 'not zaz'
                 },
-                errorsMapping: {
+                errorMapping: {
                     'bar': 'foo.bar',
                     'alpha': 'results.alpha'
                 },
@@ -379,6 +376,29 @@ If necessary, you can also add error mapping for particular steps:
             //         alpha: 'alpha'
             //     }
             // }
+        } 
+    }
+```
+
+### .errorSuppress
+
+Errors that break out of the controller will be sent through to the `.done` handler. If you need to suppress these, use `.errorSuppress`:
+
+```javascript
+    controller = {
+        errorDefaults: {
+            'retry': false
+        },
+        errorSuppress: {
+            'data.retry': false
+        },
+        block: {
+            'alpha': {
+                func: utility.doAlpha // generates new Error('bad news')
+            }
+        },
+        done: function (error, response) {
+            // error will be undefined
         } 
     }
 ```
