@@ -452,6 +452,21 @@ The `data` parameter noted above is the same as the `.data` configuration with a
 
 `stepData` is a string with some debugging information in it but is not well defined.
 
+#### Custom hook mapping
+
+You can alter the payloads for hooks by using `.func` and `.with`:
+
+```javascript
+    controller = {
+        onStart: {
+            func: console.log,
+            with: {
+                'foo': 'bar'
+            }
+        }
+    }
+```
+
 ## Block configuration
 
 Each key in `.block` represents one step that should be run. The definition for each step can include any number of settings:
