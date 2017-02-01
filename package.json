@@ -1,6 +1,6 @@
 {
   "name": "auto-block",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Simplified controller creation built around async.auto",
   "main": "dist/autoBlock.js",
   "directories": {
