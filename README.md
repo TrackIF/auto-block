@@ -336,7 +336,7 @@ If a step produces an error, you can map additional fields onto the error before
             //         alpha: 'alpha'
             //     }
             // }
-        } 
+        }
     }
 ```
 
@@ -376,7 +376,7 @@ If necessary, you can also add error mapping for particular steps:
             //         alpha: 'alpha'
             //     }
             // }
-        } 
+        }
     }
 ```
 
@@ -399,7 +399,7 @@ Errors that break out of the controller will be sent through to the `.done` hand
         },
         done: function (error, response) {
             // error will be undefined
-        } 
+        }
     }
 ```
 
@@ -434,7 +434,7 @@ After all steps are completed, you can map values into the response parameter of
             //    bar: 'zaz',
             //    alpha: 'alpha'
             // }
-        } 
+        }
     }
 ```
 
@@ -484,6 +484,20 @@ Each key in `.block` represents one step that should be run. The definition for 
 ```
 
 The last parameter of the function must be a callback. The number of other parameters is flexible (see `.when` below).
+
+### .sync
+
+`.sync` is the synchronous function that will be run during `.run`:
+
+```javascript
+    block: {
+        'alpha': {
+            sync: utility.doAlpha
+        }
+    }
+```
+
+The parameters work exactly like `.func` except no callback function is required. If the function returns a Promise, it will handle `.then` asynchronously as expected.
 
 ### .value
 
@@ -553,7 +567,7 @@ automatically wait for those steps to complete:
         'alpha': {
             func: utility.doAlpha, // runs immediately
         }
-    } 
+    }
 ```
 
 ### .after
@@ -575,7 +589,7 @@ You can add explicit dependencies using `.after`:
         'beta': {
             func: utility.doBeta, // runs immediately
         }
-    } 
+    }
 ```
 
 ### .when
@@ -592,7 +606,7 @@ You can add these sorts of value dependencies using `.when`:
             func: utility.doBeta,
             when: 'alpha.flag'
         }
-    } 
+    }
 
     // doBeta will only run if doAlpha results in a value similar to:
     // {
@@ -616,7 +630,7 @@ Value comparison is supported using objects:
                 'alpha.foo': 'bar'
             }
         }
-    } 
+    }
 
     // doBeta will only run if doAlpha result includes the follow key/value pair:
     // {
@@ -635,7 +649,7 @@ Negative checks can be made by using a `!` prefix:
             func: utility.doBeta,
             when: '!alpha.flag'
         }
-    } 
+    }
 ```
 
 Multiple checks are allowed (all checks must succeed):
@@ -654,5 +668,5 @@ Multiple checks are allowed (all checks must succeed):
                 }
             ]
         }
-    } 
+    }
 ```
